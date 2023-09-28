@@ -82,7 +82,7 @@ class TestPage extends ConsumerWidget {
               },
               child: const Text("Start Listening"),
             ),
-            ThemeHuePicker(),
+            const ThemeHuePicker(),
             ListView.builder(
                 itemCount: endpointList.length,
                 shrinkWrap: true,

@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:bishop/bishop.dart' as bishop;
+import 'package:d2chess/universal/theme.dart';
 import 'package:d2chess/widgets/theme_color_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
@@ -36,6 +37,7 @@ class _ChessTestPageState extends State<ChessTestPage> {
 
   void _onMove(Move move) async {
     bool result = game.makeSquaresMove(move);
+
     if (result) {
       setState(() => state = game.squaresState(player));
     }
@@ -63,31 +65,11 @@ class _ChessTestPageState extends State<ChessTestPage> {
               state: flipBoard ? state.board.flipped() : state.board,
               playState: state.state,
               pieceSet: PieceSet.merida(),
-              theme: BoardTheme.blueGrey.copyWith(
-                lightSquare: PlatformTheme.of(context)?.isDark == true
-                    ? Theme.of(context).colorScheme.primary
-                    : Theme.of(context).colorScheme.primaryContainer,
-                darkSquare: PlatformTheme.of(context)?.isDark == true
-                    ? Theme.of(context).colorScheme.primaryContainer
-                    : Theme.of(context).colorScheme.primary,
-                selected: PlatformTheme.of(context)?.isDark == true
-                    ? Theme.of(context).colorScheme.onPrimary.withAlpha(125)
-                    : Theme.of(context)
-                        .colorScheme
-                        .onPrimaryContainer
-                        .withAlpha(100),
-                previous: PlatformTheme.of(context)?.isDark == true
-                    ? Theme.of(context).colorScheme.onPrimary.withAlpha(125)
-                    : Theme.of(context)
-                        .colorScheme
-                        .onPrimaryContainer
-                        .withAlpha(100),
-                premove: PlatformTheme.of(context)?.isDark == true
-                    ? Theme.of(context).colorScheme.onPrimary.withAlpha(125)
-                    : Theme.of(context)
-                        .colorScheme
-                        .onPrimaryContainer
-                        .withAlpha(100),
+              theme: Themes.materialToBoard(
+                Theme.of(context),
+                PlatformTheme.of(context)?.isDark == true
+                    ? Brightness.dark
+                    : Brightness.light,
               ),
               moves: state.moves,
               onMove: _onMove,
@@ -96,7 +78,7 @@ class _ChessTestPageState extends State<ChessTestPage> {
                 empty: MarkerTheme.dot,
                 piece: MarkerTheme.corners(),
               ),
-              promotionBehaviour: PromotionBehaviour.autoPremove,
+              promotionBehaviour: PromotionBehaviour.alwaysSelect,
             ),
           ),
           const SizedBox(height: 32),
@@ -108,8 +90,8 @@ class _ChessTestPageState extends State<ChessTestPage> {
             onPressed: _flipBoard,
             child: const Text('Flip Board'),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
             child: ThemeHuePicker(),
           )
         ],

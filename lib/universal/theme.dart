@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:squares/squares.dart';
 
 class Themes {
   static final ThemeData materialDarkTheme = ThemeData.from(
@@ -44,6 +45,26 @@ class Themes {
         brightness: brightness,
         seedColor: color,
       ),
+    );
+  }
+
+  static BoardTheme materialToBoard(ThemeData data, Brightness brightness) {
+    return BoardTheme.blueGrey.copyWith(
+      lightSquare: brightness == Brightness.dark
+          ? data.colorScheme.primary
+          : data.colorScheme.primaryContainer,
+      darkSquare: brightness == Brightness.dark
+          ? data.colorScheme.primaryContainer
+          : data.colorScheme.primary,
+      selected: brightness == Brightness.dark
+          ? data.colorScheme.onPrimary.withAlpha(125)
+          : data.colorScheme.onPrimaryContainer.withAlpha(100),
+      previous: brightness == Brightness.dark
+          ? data.colorScheme.onPrimary.withAlpha(125)
+          : data.colorScheme.onPrimaryContainer.withAlpha(100),
+      premove: brightness == Brightness.dark
+          ? data.colorScheme.onPrimary.withAlpha(125)
+          : data.colorScheme.onPrimaryContainer.withAlpha(100),
     );
   }
 }

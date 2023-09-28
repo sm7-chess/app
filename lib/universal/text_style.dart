@@ -3,17 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class UniversalTextStyle {
-  final TextStyle? headlineLarge;
-  final TextStyle? headlineMedium;
-  final TextStyle? headlineSmall;
+  final TextStyle headlineLarge;
+  final TextStyle headlineMedium;
+  final TextStyle headlineSmall;
 
-  final TextStyle? bodyLarge;
-  final TextStyle? bodyMedium;
-  final TextStyle? bodySmall;
+  final TextStyle bodyLarge;
+  final TextStyle bodyMedium;
+  final TextStyle bodySmall;
 
-  final TextStyle? displayLarge;
-  final TextStyle? displayMedium;
-  final TextStyle? displaySmall;
+  final TextStyle displayLarge;
+  final TextStyle displayMedium;
+  final TextStyle displaySmall;
 
   static UniversalTextStyle fromTheme(
       bool ia, ThemeData t, CupertinoThemeData ct) {
