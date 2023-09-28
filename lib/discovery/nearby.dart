@@ -96,7 +96,8 @@ class PlatformNearby {
               endpointName: endpointName,
             ));
           },
-          onEndpointLost: (id) => onEndpointLost(id ?? ""));
+          onEndpointLost: (id) => onEndpointLost(id ?? ""),
+          serviceId: _serviceType);
     } else {
       _iosInstance?.startDiscovery();
       _onEndpointFound = onEndpointFound;
