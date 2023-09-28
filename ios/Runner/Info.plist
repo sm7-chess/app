@@ -45,5 +45,15 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSBonjourServices</key>
+        <array>
+            <string>_5B20F7BFD50B._tcp</string>
+        </array>
+        <key>UIRequiresPersistentWiFi</key>
+            <true/>
+        <key>NSBluetoothAlwaysUsageDescription</key>
+        <string>Used for finding other players</string>
+        <key>NSLocalNetworkUsageDescription</key>
+        <string>Used for finding other players</string>
 </dict>
 </plist>
