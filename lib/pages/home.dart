@@ -1,3 +1,4 @@
+import 'package:d2chess/core/toast.dart';
 import 'package:d2chess/universal/universal_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
@@ -80,7 +81,15 @@ class HomePage extends ConsumerWidget {
             ),
             PlatformIconButton(
               icon: Icon(PlatformIcons(context).add, size: 32),
-              onPressed: counter.increment,
+              onPressed: () {
+                showPlatformToast(
+                  context,
+                  "Location permission is permanently blocked",
+                  iOSMessage: "Location permanently",
+                  iOSSubtitle: "Blocked",
+                  iOSIcon: "location.slash.fill",
+                );
+              },
               material: (context, target) => MaterialIconButtonData(
                 enableFeedback: true,
                 color: Theme.of(context).colorScheme.primary,

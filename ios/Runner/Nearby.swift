@@ -7,20 +7,17 @@ class Nearby {
     let advertiser: Advertiser
     var discoverer: Discoverer? = nil
 
-    var data: String
-
     var isDiscovering: Bool = false;
     var isAdvertising: Bool = false
     var onEndpointFound: ((String, String) -> Void)? = nil
     var onEndpointLost: ((String) -> Void)? = nil
 
-    init(serviceId: String, data: String) {
+    init(serviceId: String) {
         connectionManager = ConnectionManager(serviceID: serviceId, strategy: .cluster)
         advertiser = Advertiser(connectionManager: connectionManager)
-        self.data = data;
     }
 
-    func startAdvertising() {
+    func startAdvertising(data: String) {
         if (isAdvertising) {
             stopAdvertising()
         }
@@ -139,18 +136,18 @@ class NearbyApiImplementation : NearbyApi {
         _channel.invokeMethod("endpointLost", arguments: endpointId)
     }
 
-    func initializeNearby(serviceId: String, data: String){
+    func initializeNearby(serviceId: String){
         _nearby?.stopAdvertising()
         _nearby?.stopDiscovery()
-        _nearby = Nearby(serviceId: serviceId, data: data)
+        _nearby = Nearby(serviceId: serviceId)
     }
-    func startAdvertising(){
-        _nearby?.startAdvertising()
+    func startAdvertising(data: String){
+        _nearby?.startAdvertising(data: data)
     }
     func stopAdvertising(){
         _nearby?.stopAdvertising()
     }
-    func startDiscovery(){
+    func startDiscovery(data: String){
         _nearby?.startDiscovery(onEndpointFound: onEndpointFound, onEndpointLost: onEndpointLost)
     }
     func stopDiscovery(){

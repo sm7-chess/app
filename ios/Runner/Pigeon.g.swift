@@ -39,10 +39,10 @@ private func nilOrValue<T>(_ value: Any?) -> T? {
 }
 /// Generated protocol from Pigeon that represents a handler of messages from Flutter.
 protocol NearbyApi {
-  func initializeNearby(serviceId: String, data: String) throws
-  func startAdvertising() throws
+  func initializeNearby(serviceId: String) throws
+  func startAdvertising(data: String) throws
   func stopAdvertising() throws
-  func startDiscovery() throws
+  func startDiscovery(data: String) throws
   func stopDiscovery() throws
 }
 
@@ -56,9 +56,8 @@ class NearbyApiSetup {
       initializeNearbyChannel.setMessageHandler { message, reply in
         let args = message as! [Any?]
         let serviceIdArg = args[0] as! String
-        let dataArg = args[1] as! String
         do {
-          try api.initializeNearby(serviceId: serviceIdArg, data: dataArg)
+          try api.initializeNearby(serviceId: serviceIdArg)
           reply(wrapResult(nil))
         } catch {
           reply(wrapError(error))
@@ -69,9 +68,11 @@ class NearbyApiSetup {
     }
     let startAdvertisingChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.d2chess.NearbyApi.startAdvertising", binaryMessenger: binaryMessenger)
     if let api = api {
-      startAdvertisingChannel.setMessageHandler { _, reply in
+      startAdvertisingChannel.setMessageHandler { message, reply in
+        let args = message as! [Any?]
+        let dataArg = args[0] as! String
         do {
-          try api.startAdvertising()
+          try api.startAdvertising(data: dataArg)
           reply(wrapResult(nil))
         } catch {
           reply(wrapError(error))
@@ -95,9 +96,11 @@ class NearbyApiSetup {
     }
     let startDiscoveryChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.d2chess.NearbyApi.startDiscovery", binaryMessenger: binaryMessenger)
     if let api = api {
-      startDiscoveryChannel.setMessageHandler { _, reply in
+      startDiscoveryChannel.setMessageHandler { message, reply in
+        let args = message as! [Any?]
+        let dataArg = args[0] as! String
         do {
-          try api.startDiscovery()
+          try api.startDiscovery(data: dataArg)
           reply(wrapResult(nil))
         } catch {
           reply(wrapError(error))

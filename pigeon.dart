@@ -9,9 +9,9 @@ import 'package:pigeon/pigeon.dart';
 ))
 @HostApi()
 abstract class NearbyApi {
-  void initializeNearby(String serviceId, String data);
-  void startAdvertising();
+  void initializeNearby(String serviceId);
+  void startAdvertising(String data);
   void stopAdvertising();
-  void startDiscovery();
+  void startDiscovery(String data);
   void stopDiscovery();
 }

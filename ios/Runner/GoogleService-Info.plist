@@ -9,7 +9,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>nl.kurza.chess</string>
+	<string>nl.kurza.chess.dev</string>
 	<key>PROJECT_ID</key>
 	<string>d2chess-40270612</string>
 	<key>STORAGE_BUCKET</key>
@@ -25,6 +25,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:77719521145:ios:1922607e5054af083f51a8</string>
+	<string>1:77719521145:ios:bef2a2e7294bf5ea3f51a8</string>
 </dict>
 </plist>

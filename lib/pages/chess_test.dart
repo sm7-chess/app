@@ -5,6 +5,7 @@ import 'package:d2chess/universal/theme.dart';
 import 'package:d2chess/widgets/theme_color_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
+import 'package:haptic_feedback/haptic_feedback.dart';
 import 'package:square_bishop/square_bishop.dart';
 import 'package:squares/squares.dart';
 
@@ -35,7 +36,7 @@ class _ChessTestPageState extends State<ChessTestPage> {
 
   void _flipBoard() => setState(() => flipBoard = !flipBoard);
 
-  void _onMove(Move move) async {
+  Future<void> _onMove(Move move) async {
     bool result = game.makeSquaresMove(move);
 
     if (result) {
@@ -74,6 +75,11 @@ class _ChessTestPageState extends State<ChessTestPage> {
               moves: state.moves,
               onMove: _onMove,
               onPremove: _onMove,
+              onSetPremove: (move) async {
+                if (await Haptics.canVibrate()) {
+                  await Haptics.vibrate(HapticsType.rigid);
+                }
+              },
               markerTheme: MarkerTheme(
                 empty: MarkerTheme.dot,
                 piece: MarkerTheme.corners(),

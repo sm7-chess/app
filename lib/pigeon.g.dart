@@ -18,12 +18,12 @@ class NearbyApi {
 
   static const MessageCodec<Object?> codec = StandardMessageCodec();
 
-  Future<void> initializeNearby(String arg_serviceId, String arg_data) async {
+  Future<void> initializeNearby(String arg_serviceId) async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
         'dev.flutter.pigeon.d2chess.NearbyApi.initializeNearby', codec,
         binaryMessenger: _binaryMessenger);
     final List<Object?>? replyList =
-        await channel.send(<Object?>[arg_serviceId, arg_data]) as List<Object?>?;
+        await channel.send(<Object?>[arg_serviceId]) as List<Object?>?;
     if (replyList == null) {
       throw PlatformException(
         code: 'channel-error',
@@ -40,12 +40,12 @@ class NearbyApi {
     }
   }
 
-  Future<void> startAdvertising() async {
+  Future<void> startAdvertising(String arg_data) async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
         'dev.flutter.pigeon.d2chess.NearbyApi.startAdvertising', codec,
         binaryMessenger: _binaryMessenger);
     final List<Object?>? replyList =
-        await channel.send(null) as List<Object?>?;
+        await channel.send(<Object?>[arg_data]) as List<Object?>?;
     if (replyList == null) {
       throw PlatformException(
         code: 'channel-error',
@@ -84,12 +84,12 @@ class NearbyApi {
     }
   }
 
-  Future<void> startDiscovery() async {
+  Future<void> startDiscovery(String arg_data) async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
         'dev.flutter.pigeon.d2chess.NearbyApi.startDiscovery', codec,
         binaryMessenger: _binaryMessenger);
     final List<Object?>? replyList =
-        await channel.send(null) as List<Object?>?;
+        await channel.send(<Object?>[arg_data]) as List<Object?>?;
     if (replyList == null) {
       throw PlatformException(
         code: 'channel-error',
